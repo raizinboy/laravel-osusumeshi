@@ -1,116 +1,84 @@
-@font-face {
-    font-family: YuGo;
-    src: local(YuGo-Medium),
-      url(/path/to/YuGo-Medium.woff2) format("woff2"),
-      url(/path/to/YuGo-Medium.woff) format("woff"),
-      url(/path/to/YuGo-Medium.ttf) format("truetype");
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-}
-
-@font-face {
-font-family: YuGo;
-src: local(YuGo-Bold),
-    url(/path/to/YuGo-Bold.woff2) format("woff2"),
-    url(/path/to/YuGo-Bold.woff) format("woff"),
-    url(/path/to/YuGo-Bold.ttf) format("truetype");
-font-weight: bold;
-font-style: normal;
-font-stretch: normal;
-}
-
 h1 {
-font-family: YuGo;
-font-size: 26px;
-font-weight: bold;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: -0.13px;
+    font-family: YuGo;
+    font-size: 26px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.13px;
 }
 
 h2 {
-font-family: YuGo;
-font-size: 22px;
-font-weight: bold;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: normal;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
 }
 
 h3 {
-font-family: YuGo;
-font-size: 18px;
-font-weight: bold;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: 0.04px;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.04px;
 }
 
 big {
-font-family: YuGo;
-font-size: 16px;
-font-weight: 500;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: 0.08px;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.08px;
 }
 
 body {
-font-family: YuGo;
-font-size: 14px;
-font-weight: 500;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: 0.11px;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.11px;
+    background-color: #fae9e3;
 }
 
 caption {
-font-family: YuGo;
-font-size: 12px;
-font-weight: 500;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: 0.08px;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.08px;
 }
 
 label {
-font-family: YuGo;
-font-size: 14px;
-font-weight: bold;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: normal;
-color: #191919;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .osusumeshi-login-input {
-border-radius: 2px;
-border: solid 1px #000000;
+    border-radius: 2px;
+    border: solid 1px #000000;
 }
 
 .osusumeshi-check-label {
-font-size: 12px;
-font-weight: 900;
+    font-size: 12px;
+    font-weight: 900;
 }
 
 .osusumeshi-login-text {
-color: #08b0d1;
+    color: #08b0d1;
 }
 
 .osusumeshi-require-input-label-text {
-margin-left: 10px;
-padding-left: 5px;
-padding-right: 5px;
-color: white;
-background-color:#d93316;
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    background-color:#d93316;
 }
 
 .mypage_btn {
@@ -126,4 +94,36 @@ background-color:#d93316;
 .mypage_btn:hover{
     background-position: -100% 0;
     color: #fff;
+}
+
+.top_btn{
+    text-decoration:none;
+    color: #430af0;
+}
+
+.top_btn:hover {
+    opacity:35%;
+}
+
+.osusumeshi-edit-user-info-label {
+    margin-bottom:8px;
+    font-size: 16px; 
+}
+
+.show_password_login_input_btn {
+    position:absolute;
+    top: 12px;
+    right: 6px;
+}
+
+.show_password_register_input_btn {
+    position:absolute;
+    top: 12px;
+    right: 18px;
+}
+
+.show_password_edit_input_btn {
+    position:absolute;
+    top: 12px;
+    right: 18px;
 }

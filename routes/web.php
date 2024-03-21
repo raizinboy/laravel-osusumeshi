@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +29,15 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::controller(UserController::class)->group(function() {
-        Route::get('user/mypage', 'mypage')->name('mypage');
-        Route::get('user/mypage/edit', 'edit')->name('mypage.edit');
-        Route::put('user/mypage', 'update')->name('mypage.update');
-    })
+        Route::get('users/mypage', 'mypage')->name('mypage');
+        Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
+        Route::put('users/mypage', 'update')->name('mypage.update');
+        Route::delete('users/mypage/destroy', 'destroy')->name('mypage.destroy');
+        Route::get('users/mypage/password/edit', 'edit_password')->name('mypage.edit_password');
+        Route::put('users/mypage/password', 'update_password')->name('mypage.update_password');
+    });
+
+    Route::resource('posts', PostController::class);
+    
+    Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
 });

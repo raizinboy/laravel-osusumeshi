@@ -3,7 +3,7 @@
  @section('content')
  <div class="container">
      <div class="row justify-content-center">
-         <div class="col-md-5">
+         <div class="col-md-6 ms-0 me-0">
              <h3 class="mt-3 mb-3 fw-bold">新規会員登録</h3>
  
              <hr>
@@ -46,9 +46,9 @@
                  <div class="form-group row mb-1">
                      <label for="password" class="col-md-5 col-form-label text-md-left fw-bold">パスワード<span class="osusumeshi-require-input-label-text">必須</span></label>
  
-                     <div class="col-md-7">
+                     <div class="col-md-7 position-relative">
                          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror osusumeshi-login-input" name="password" required autocomplete="new-password">
- 
+                         <i class="show_password_register_input_btn align-items-center fa-solid fa-eye pe-0" id="show_password_btn"></i>
                          @error('password')
                          <span class="invalid-feedback" role="alert">
                              <strong>{{ $message }}</strong>
@@ -58,10 +58,11 @@
                  </div>
  
                  <div class="form-group row mb-1">
-                 <label for="password-confirm" class="col-md-5 col-form-label text-md-left fw-bold">パスワード(確認用)<span class="osusumeshi-require-input-label-text">必須</span></label>
+                 <label for="password_confirm" class="col-md-5 col-form-label text-md-left fw-bold">パスワード(確認用)<span class="osusumeshi-require-input-label-text">必須</span></label>
  
-                     <div class="col-md-7">
-                         <input id="password-confirm" type="password" class="form-control osusumeshi-login-input" name="password_confirmation" required autocomplete="new-password">
+                     <div class="col-md-7 position-relative">
+                         <input id="password_confirm" type="password" class="form-control osusumeshi-login-input" name="password_confirmation" required autocomplete="new-password">
+                         <i class="show_password_register_input_btn fa-solid fa-eye" id="show_password_confirm_btn"></i>
                      </div>
                  </div>
  

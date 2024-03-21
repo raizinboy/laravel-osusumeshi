@@ -11,20 +11,20 @@
                  @csrf
  
                  <div class="form-group mb-1">
-                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror osusumeshi-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror osusumeshi-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
  
-                     @error('email')
+                    @error('email')
                         @foreach($errors->get('email') as $message)
                         <span class="invalid-feedback" role="alert">
                             <strong>{{$message}}</strong>
                         </span>
                         @endforeach
-                     @enderror
+                    @enderror
                  </div>
  
-                 <div class="form-group">
-                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror osusumeshi-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
- 
+                 <div class="form-group position-relative">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror osusumeshi-login-input" name="password" required autocomplete="current-password" placeholder="パスワード">
+                    <i class="show_password_login_input_btn fa-solid fa-eye" id="show_password_btn"></i>
                      @error('password')
                         @foreach($errors->get('password') as $message)
                             <span class="invalid-feedback" role="alert">

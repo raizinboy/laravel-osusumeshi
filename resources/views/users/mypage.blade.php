@@ -4,7 +4,8 @@
  <div class="container d-flex justify-content-center mt-3">
      <div class="row col-md-6 col-10">
          <h1>マイページ</h1>
-         <a href="{{ route('top') }}" class="text-decoration-none top_btn">＞TOPに戻る</a>
+         <!--ルート未選択-->
+         <a href="#" class="text-decoration-none top_btn">>TOPに戻る</a>
  
          <hr>
  
@@ -40,7 +41,7 @@
                     <i class=" fa-solid fa-credit-card fa-3x"></i>
                 </div>
                 <div class="col-md-10 col-9 d-flex align-items-center">
-                        <a class="fs-3 mypage_btn" href="{{ route('mypage.getPaymentMethod') }}">有料会員登録</a>
+                        <a class="fs-3 mypage_btn" href="#">有料会員登録</a>
                 </div>
             </div>
         </div>
@@ -48,15 +49,13 @@
 
         <hr>
         
-        @auth
-        @if (auth()->user()->subscribed('default'))
         <div class="container">
             <div class="row mb-3">
                 <div class="col-md-1 col-2 d-flex align-items-center ps-1">
                     <i class=" fa-solid fa-heart fa-3x"></i>
                 </div>
                 <div class="col-md-10 col-9 d-flex align-items-center">
-                        <a class="fs-3 mypage_btn" href="{{ route('mypage.favorite') }}" >お気に入り店舗一覧</a>
+                        <a class="fs-3 mypage_btn" href="#" >お気に入り店舗一覧</a>
                 </div>
             </div>
         </div>
@@ -69,15 +68,13 @@
                     <i class=" fa-solid fa-shop fa-3x"></i>
                 </div>
                 <div class="col-md-10 col-9 d-flex align-items-center">
-                        <a class="fs-3 mypage_btn" href="{{ route('reservation.show') }}" >予約の確認</a>
+                        <a class="fs-3 mypage_btn" href="#" >予約の確認</a>
                 </div>
             </div>
         </div>
 
         <hr>
 
-        @endif
-        @endauth
         <div class="container">
             <div class="row mb-3">
                 <div class="col-md-1 col-2 d-flex align-items-center ps-2">
