@@ -5,14 +5,14 @@
      <div class="row justify-content-center">
          <div class="col-md-6">
              <span>
-                 <a href="{{ route('mypage') }}" class="top_btn">マイページ</a> > 会員情報の編集
+                 <a href="{{ route('mypage',Auth::id()) }}" class="top_btn">マイページ</a> > 会員情報の編集
              </span>
  
              <h1 class="mt-3 mb-3 fs-1">会員情報の編集/削除</h1>
              <hr>
  
              <!--アップデートフォーム-->
-             <form method="POST" action="{{ route('mypage') }}">
+             <form method="POST" action="{{ route('mypage',Auth::id()) }}">
                  @csrf
                  <input type="hidden" name="_method" value="PUT">
                  <div class="form-group">

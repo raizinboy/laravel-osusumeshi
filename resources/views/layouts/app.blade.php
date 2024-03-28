@@ -18,22 +18,22 @@
     <script src="https://kit.fontawesome.com/72fb19de51.js" crossorigin="anonymous"></script>
 
     <!--style -->
-    <link href="{{ asset('css/osusumeshi.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
         @component('components.header')
         @endcomponent    
 
-        <main class="py-4">
+        <main class="py-1">
             @yield('content')
         </main>
 
         @component('components.footer')
         @endcomponent  
     </div>
-    <script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="crossorigin="anonymous"></script>
-    <script src="{{ asset('js/osusumeshi.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="crossorigin="anonymous"></script>
+    @vite(['resources/css/app.css','resources/js/app.js']) 
 </body>
 </html>

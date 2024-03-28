@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,7 @@ use App\Http\Controllers\AjaxController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WebController::class, 'index'])->name('top');
 
 Auth::routes(['verify' => true]);
 
@@ -29,7 +29,7 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::controller(UserController::class)->group(function() {
-        Route::get('users/mypage', 'mypage')->name('mypage');
+        Route::get('users/{id}', 'mypage')->name('mypage');
         Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
         Route::put('users/mypage', 'update')->name('mypage.update');
         Route::delete('users/mypage/destroy', 'destroy')->name('mypage.destroy');
@@ -38,6 +38,10 @@ Route::middleware(['auth','verified'])->group(function(){
     });
 
     Route::resource('posts', PostController::class);
-    
-    Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
+    Route::get('posts/ikitai/{id}', [PostController::class, 'ikitai'])->name('posts.ikitai');
+    Route::get('posts/emparhy/{id}', [PostController::class, 'empathy'])->name('posts.empathy');
+
+    Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
 });
+    Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
+

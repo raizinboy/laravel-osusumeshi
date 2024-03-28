@@ -19,8 +19,7 @@
             </div>
 
             <div class="text-center">
-                <h1>ルート未選択</h1>
-                <a href="#" class="btn btn-primary mt-3 ps-3 pe-3 pt-2 pb-2">トップに戻る</a>
+                <a href="{{ route('top') }}" class="btn btn-primary mt-3 ps-3 pe-3 pt-2 pb-2">トップに戻る</a>
             </div>
 
         </div>

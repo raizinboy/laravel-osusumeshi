@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function mypage()
+    public function mypage($id)
     {
-        $user = Auth::user();
+        $user = User::where('id', $id)->get();
 
         return view('users.mypage',compact('user'));
     }
