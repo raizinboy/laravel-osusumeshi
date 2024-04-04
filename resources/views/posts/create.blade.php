@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mb-5">
+    @if(session('message'))
+    <div class="row justify-content-center">
+        <div class="col-md-10 alert alert-primary p-5 m-2 fs-1 border rounded-3 fw-bold text-center">{{ session('message') }}</div>
+    </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h1 class="fs-1 mb-0">新規投稿</h1>
@@ -28,9 +33,16 @@
                     <div class="col-md-3">
                         <div class="form-group mb-2">
                             <label for="city" class="cpl-md-12 fs-4">市町村<span class="osusumeshi-posts-input-label">必須</span></label>
-                            <select name="city" class="col-md-12 p-2 border rounded" id="city">
+                            <select name="city" class="col-md-12 p-2 border rounded @error('city') is-invalid @enderror"" id="city">
                                 <option value=""></option>
                             </select>
+                            @error('city')
+                                @foreach($errors->get('city') as $message)
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @endforeach
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -72,7 +84,7 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label for="content" class="fs-4">内容<span class="osusumeshi-posts-input-label">必須</label>
+                    <label for="content" class="fs-4">おすすめ内容<span class="osusumeshi-posts-input-label">必須</label>
                     <textarea name="content" id="content" rows="13" class="form-control @error('content') is-invalid @enderror" placeholder="aaaa">{{ old('content')}}</textarea>
                     @error('content')
                         @foreach($errors->get('content') as $message)

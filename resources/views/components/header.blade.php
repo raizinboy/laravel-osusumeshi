@@ -36,13 +36,37 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('mypage',Auth::id()) }}"> 
+                                    <a class="dropdown-item pt-0 pb-2" href="{{ route('mypage',Auth::id()) }}"> 
                                     マイページ
                                     </a>
 
                                     <hr class="m-0">
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('mypage.show_ikitai') }}"> 
+                                    行きたい投稿一覧
+                                    </a>
+
+                                    <hr class="m-0">
+
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('mypage.show_empathy') }}"> 
+                                    共感した投稿一覧
+                                    </a>
+
+                                    <hr class="m-0">
+
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('mypage.edit') }}"> 
+                                    会員情報の編集/削除
+                                    </a>
+
+                                    <hr class="m-0">
+
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('mypage.edit_password') }}"> 
+                                    パスワードの変更
+                                    </a>
+
+                                    <hr class="m-0">
+
+                                    <a class="dropdown-item pb-0 pt-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

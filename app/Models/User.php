@@ -72,4 +72,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Empathy::class);
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function Post_reports()
+    {
+        return $this->hasmany(Post_reports::class);
+    }
 }

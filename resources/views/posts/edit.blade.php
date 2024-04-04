@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label for="content" class="fs-4">内容<span class="osusumeshi-posts-input-label">必須</span></label>
+                    <label for="content" class="fs-4">おすすめ内容<span class="osusumeshi-posts-input-label">必須</span></label>
                     <textarea name="content" id="content" rows="13" class="form-control @error('content') is-invalid @enderror"> {{ $post->content }}</textarea>
                     @error('content')
                         @foreach($errors->get('content') as $message)

@@ -5,7 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Post_reportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,8 @@ Route::get('/', [WebController::class, 'index'])->name('top');
 
 Auth::routes(['verify' => true]);
 
+Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
+
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 //メール認証できていない場合はここに記載されているルートにはアクセスできない
@@ -35,13 +39,20 @@ Route::middleware(['auth','verified'])->group(function(){
         Route::delete('users/mypage/destroy', 'destroy')->name('mypage.destroy');
         Route::get('users/mypage/password/edit', 'edit_password')->name('mypage.edit_password');
         Route::put('users/mypage/password', 'update_password')->name('mypage.update_password');
+        Route::get('users/mypage/ikitai', 'show_ikitai')->name('mypage.show_ikitai');
+        Route::get('users/mypage/empathy', 'show_empathy')->name('mypage.show_empathy');
     });
 
+    Route::post('users/mypage/profile/create', [ProfileController::class, 'create'])->name('profile.create');
+    Route::put('users/mypage/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::resource('posts', PostController::class);
-    Route::get('posts/ikitai/{id}', [PostController::class, 'ikitai'])->name('posts.ikitai');
-    Route::get('posts/emparhy/{id}', [PostController::class, 'empathy'])->name('posts.empathy');
+    Route::post('posts/ikitai/{id}', [PostController::class, 'ikitai'])->name('posts.ikitai');
+    Route::post('posts/empathy/{id}', [PostController::class, 'empathy'])->name('posts.empathy');
 
-    Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('posts/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::put('posts/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+    Route::delete('posts/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+    Route::post('posts/post_report', [Post_reportController::class, 'store'])->name('post_report.store');
 });
-    Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
-
