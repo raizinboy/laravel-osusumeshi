@@ -17,7 +17,7 @@
         <div class="card col-md-10 mb-3">
             <div class="card-body pb-0">
                 <div class="row d-flex justify-content-between">
-                    <a class="col-md-3 fs-3 text-decoration-none" href="{{route('mypage',$post->user->id) }}"><i class="fa-solid fa-circle-user me-2"></i>{{ $post->user->name }}</h3>
+                    <a class="col-md-3 fs-3 text-decoration-none" href="{{route('mypage',$post->user->id) }}"><i class="fa-solid fa-circle-user me-2"></i>{{ $post->user->name }}</a>
                     @if($user->id == $post->user_id)
                     <div class="dropdown col-md-2">
                         <a href="#" class="dropdown-toggle px-1 fs-5 fw-bold link-dark text-decoration-none float-end menu-icon" id="dropdownpostMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">︙</a>
@@ -63,7 +63,7 @@
                 <p class="mb-0"><span class="me-1">{{ $post->prefecture->name }}</span>><span class="ms-1 me-1">{{ $post->city }}</span>><span class="ms-1 fs-3 fw-bold">{{ $post->shop_name }}</span></p>
                 <h1 class="card-title fs-1" id="{{ $post->id }}"><span class="">{{ $post->title }}</span></h1>
                 @if($post->image !== '')
-                    <img src="{{ asset('storage/photos/' . $post->image) }}" class="img-fluid w-100"  alt="投稿画像">
+                    <img src="{{ $post->image) }}" class="img-fluid w-100"  alt="投稿画像">
                     <br>
                 @endif
                 <p class="content mt-2 fs-5">{{ $post->content }}</p>

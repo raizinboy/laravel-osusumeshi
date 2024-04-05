@@ -21,45 +21,40 @@ class PostController extends Controller
     {
         $posts_array = array();
 
+        $prefecture = "";
+        $city = "";
+        $shop_name="";
+
         if($request->input('prefecture_id') !== null){
             if($request->input('city') !== null) {
                 if ($request->input('shop_name') !== null){
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
                     $shop_name = $request->input('shop_name');
-                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
                     $total_count = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->count();
                 } else {
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
-                    $shop_name = null;
-                    $posts = Post::where('city', $request->input('city'))->withCount('ikitais')->withCount('empathies')->paginate(4);
+                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
                     $total_count = Post::where('city', $request->input('city'))->count();
                 }
             } elseif ($request->input('shop_name') !== null){
                 $prefecture = $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                $city = null;
                 $shop_name = $request->input('shop_name');
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->withCount('ikitais')->withCount('empathies')->paginate(4);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->count();
             } else {
                 $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                $city = null;
-                $shop_name = null;
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->withCount('ikitais')->withCount('empathies')->paginate(4);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->count();
             }
         } elseif($request->input('shop_name') !== null){
-            $prefecture = null;
-            $city = null;
             $shop_name = $request->input('shop_name');
-            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
             $total_count = Post::where('shop_name', 'LIKE', "%$shop_name%")->count();
         } else {
-            $prefecture = null;
-            $city = null;
-            $shop_name = null;
-            $posts = Post::sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+            $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
             $total_count = Post::count();
         }
         
@@ -131,6 +126,7 @@ class PostController extends Controller
             'content' => 'required',
         ]);
 
+        /*
         $filename="";
         $image = $request->file('image');
 
@@ -142,6 +138,7 @@ class PostController extends Controller
             // publicディレクトリのphotoディレクトリに保存
             $path = $image->storeAs('photos', $filename, 'public');
         }
+        */
 
         $post = new Post();
         $post->prefecture_id = $request->input('prefecture_id');
@@ -149,7 +146,10 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->shop_name  = $request->input('shop_name');
         $post->title = $request->input('title');
-        $post->image = $filename;
+
+        $path = Storage::disk('s3')->putFile('photo/', $request->file('image'), 'public');
+        $post->image = Storage::disk('s3')->url($path);
+        
         $post->content = $request->input('content');
         try {
         $post->save();

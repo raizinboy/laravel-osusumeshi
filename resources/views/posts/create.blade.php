@@ -34,7 +34,7 @@
                         <div class="form-group mb-2">
                             <label for="city" class="cpl-md-12 fs-4">市町村<span class="osusumeshi-posts-input-label">必須</span></label>
                             <select name="city" class="col-md-12 p-2 border rounded @error('city') is-invalid @enderror"" id="city">
-                                <option value=""></option>
+                                <option value="aaa">aaa</option>
                             </select>
                             @error('city')
                                 @foreach($errors->get('city') as $message)

@@ -63,7 +63,8 @@
         <div class="col-md-10 col-11 d-flex fs-5 mt-2">
             <div class="me-2 fw-bold">並び替え：</div>
             <div class="me-3">@sortablelink('ikitais_count', '行きたい数')</div>
-            <div>@sortablelink('empathies_count', '共感数')</div>
+            <div class="me-3">@sortablelink('empathies_count', '共感数')</div>
+            <div>@sortablelink('updated_at', '新着順')</div>
         </div>
 
         <p class="page-number align-middle mb-0 col-md-10 col-10">< 全{{$posts->lastPage()}}ページ中： <span class="fs-1 fw-bold">{{$posts->currentPage()}}</span> ページ目  ></p>

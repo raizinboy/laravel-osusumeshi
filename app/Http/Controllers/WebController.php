@@ -14,7 +14,7 @@ class WebController extends Controller
 {
     public function index()
     {
-        $recommend_posts = Post::withCount('ikitais')->orderBy('ikitais_count', 'desc')->take(3)->get();
+        $recommend_posts = Post::withCount('ikitais')->orderBy('ikitais_count', 'desc')->with('prefecture','user')->take(3)->get();
 
         foreach($recommend_posts as $recommend_post){
             if(Ikitai::where('post_id', $recommend_post->id)->where('user_id', Auth::id())->exists()){
@@ -46,7 +46,7 @@ class WebController extends Controller
             };
         }
 
-        $new_posts = Post::latest('updated_at')->take(3)->get();
+        $new_posts = Post::latest('updated_at')->with('prefecture','user')->take(3)->get();
         foreach($new_posts as $new_post){
             if(Ikitai::where('post_id', $new_post->id)->where('user_id', Auth::id())->exists()){
                 $posts_array["$new_post->id"] = [
