@@ -138,7 +138,7 @@ window.addEventListener('DOMContentLoaded', function(){
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
-            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/ikitai/${postId}`,
+            url: `/posts/ikitai/${postId}`,
             type: "POST",    
         }).done(function(data) {
             //disabled解除
@@ -188,7 +188,7 @@ window.addEventListener('DOMContentLoaded', function(){
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
-            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/ikitai/${postId}`,
+            url: `/posts/ikitai/${postId}`,
             type: "POST",    
         }).done(function(data) {
             empathyBtn.prop('disabled',false);
