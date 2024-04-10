@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'Ocp-Apim-Subscription-Key':'b926065402d94d948d5d68a8e6df4bef',
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax`,
+            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
@@ -138,7 +138,7 @@ window.addEventListener('DOMContentLoaded', function(){
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
-            url: `/laravel-osusumeshi/public/posts/ikitai/${postId}`,
+            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/ikitai/${postId}`,
             type: "POST",    
         }).done(function(data) {
             //disabled解除
@@ -188,7 +188,7 @@ window.addEventListener('DOMContentLoaded', function(){
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
-            url: `/laravel-osusumeshi/public/posts/empathy/${postId}`,
+            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/ikitai/${postId}`,
             type: "POST",    
         }).done(function(data) {
             empathyBtn.prop('disabled',false);
