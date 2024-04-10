@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Ikitai;
 use App\Models\Empathy;
 use App\Models\Prefecture;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
