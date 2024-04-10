@@ -188,7 +188,7 @@ window.addEventListener('DOMContentLoaded', function(){
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
-            url: `/posts/ikitai/${postId}`,
+            url: `/posts/empathy/${postId}`,
             type: "POST",    
         }).done(function(data) {
             empathyBtn.prop('disabled',false);
@@ -228,7 +228,6 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#image').on('change', function(e) {
         //画像を読み込む
         const reader = new FileReader();
-        console.log('a');
         if (this.files[0]) {
             //result属性にファイルのURLを格納
             reader.readAsDataURL(this.files[0]);
