@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'Ocp-Apim-Subscription-Key':'b926065402d94d948d5d68a8e6df4bef',
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax'`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'Ocp-Apim-Subscription-Key':'b926065402d94d948d5d68a8e6df4bef',
             },
             type:"POST",
-            url: `/osusumeshi-e020410cc33c.herokuapp.com/posts/create/ajax`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 

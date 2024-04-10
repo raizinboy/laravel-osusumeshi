@@ -175,7 +175,7 @@
                         </div>
 
                         <div class="col-md-4 text-center fs-5">
-                            <a href="/laravel-osusumeshi/public/posts/{{$recommend_post->id}}#comment" class="post-btn btn btn-success fs-4 w-75"><i class="fa-solid fa-comment me-1"></i><span>{{ $recommend_post->comments->count() }}</span><span class="ms-2 fs-5 align-middle">コメント</span></a>
+                            <a href="/posts/{{$recommend_post->id}}#comment" class="post-btn btn btn-success fs-4 w-75"><i class="fa-solid fa-comment me-1"></i><span>{{ $recommend_post->comments->count() }}</span><span class="ms-2 fs-5 align-middle">コメント</span></a>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                             </div>
 
                             <div class="col-md-4 text-center fs-5">
-                                <a href="/laravel-osusumeshi/public/posts/{{$recommend_post->id}}#comment" class="post-btn btn btn-success fs-4 w-75"><i class="fa-solid fa-comment me-1"></i><span>{{ $recommend_post->comments->count() }}</span><span class="ms-2 fs-5 align-middle">コメント</span></a>
+                                <a href="/posts/{{$recommend_post->id}}#comment" class="post-btn btn btn-success fs-4 w-75"><i class="fa-solid fa-comment me-1"></i><span>{{ $recommend_post->comments->count() }}</span><span class="ms-2 fs-5 align-middle">コメント</span></a>
                             </div>
                         </div>
                     </div>
