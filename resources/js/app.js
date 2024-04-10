@@ -1,5 +1,5 @@
 import './bootstrap';
-const ajaxUrl = import.meta.env.VITE_AJAX_CITY_URL;
+
 
 window.addEventListener('DOMContentLoaded', function(){
     const showPasswordBtn = document.getElementById('show_password_btn');
@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'Ocp-Apim-Subscription-Key':'b926065402d94d948d5d68a8e6df4bef',
             },
             type:"POST",
-            url: ajaxUrl,
+            url: `/laravel-osusumeshi/public/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             type:"POST",
-            url: ajaxUrl,
+            url: `/laravel-osusumeshi/public/posts/create/ajax'`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 'Ocp-Apim-Subscription-Key':'b926065402d94d948d5d68a8e6df4bef',
             },
             type:"POST",
-            url: ajaxUrl,
+            url: `/laravel-osusumeshi/public/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
             dataType: "json"
 
