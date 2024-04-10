@@ -13,7 +13,7 @@
             </div>
             <div class="carousel-inner h-100">
                 <div class="carousel-item active h-100">
-                    <img src="{{ asset('img/top.jpg') }}" class="crousel-img d-block w-100" alt="トップ画像1">
+                    <img src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/top.jpg" class="crousel-img d-block w-100" alt="トップ画像1">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="carousel-label mb-5">おすすめし</h1>
                         <div class="pt-4">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="carousel-item h-100">
-                    <img src="{{ asset('img/top2.jpg') }}" class="crousel-img d-block w-100" alt="トップ画像2">
+                    <img src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/top2.jpg" class="crousel-img d-block w-100" alt="トップ画像2">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="carousel-label mb-5">あなたのおすすめが</h1>
                         <div class="pt-4">
@@ -40,7 +40,7 @@
                 </div>
                 
                 <div class="carousel-item h-100">
-                    <img src="{{ asset('img/top1.jpg') }}" class="crousel-img d-block w-100" alt="トップ画像3">
+                    <img src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/top1.jpg" class="crousel-img d-block w-100" alt="トップ画像3">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="carousel-label-2 text-white">みんなのおすすめに！</h1>
                         <div class="pt-4">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="carousel-item h-100">
-                    <img src="{{ asset('img/top4.edited.jpg') }}" class="crousel-img d-block w-100" alt="トップ画像4">
+                    <img src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/top4.edited.jpg" class="crousel-img d-block w-100" alt="トップ画像4">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="carousel-label-2 text-white mb-5">みんなのおすすめが</h1>
                         <div class="pt-3">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="carousel-item h-100">
-                    <img src="{{ asset('img/top3.jpg') }}" class="crousel-img d-block w-100" alt="トップ画像5">
+                    <img src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/top3.jpg" class="crousel-img d-block w-100" alt="トップ画像5">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="carousel-label">あなたのおすすめに！</h1>
                         <div class="mt-5">
@@ -157,11 +157,11 @@
                     
                         <p class="mb-1"><span class="me-1">{{ $recommend_post->prefecture->name }}</span>><span class="ms-1 me-1">{{ $recommend_post->city }}</span>><span class="ms-1 fs-3 fw-bold">{{ $recommend_post->shop_name }}</span></p>
                         <h1 class="post-title fw-bold" id="{{$recommend_post->id}}">{{ $recommend_post->title }}</h1>
-                        @if($recommend_post->image !== '')
-                            <img src="{{ asset('storage/photos/' . $recommend_post->image) }}" class="img-fluid w-100" alt="投稿画像">
+                        @if($recommend_post->image)
+                            <img src="{{ $recommend_post->image }}" class="img-fluid w-100" alt="投稿画像">
                             <br>
                         @endif
-                        <p class="content mt-3 fs-5">{{ $recommend_post->content }}</p>
+                        <p class="index-content content mt-3 fs-5">{{ $recommend_post->content }}</p>
                         <p> {{ $recommend_post->updated_at}}</p>
                         <hr>
                     </a>
@@ -197,8 +197,8 @@
                         
                             <p class="mb-1"><span class="me-1">{{ $post->prefecture->name }}</span>><span class="ms-1 me-1">{{ $post->city }}</span>><span class="ms-1 fs-4 fw-bold">{{ $post->shop_name }}</span></p>
                             <h1 class="post-title fw-bold" id="{{$post->id}}">{{ $post->title }}</h1>
-                            @if($post->image !== '')
-                                <img src="{{ asset('storage/photos/' . $post->image) }}" class="img-fluid w-100"  alt="投稿画像">
+                            @if($post->image)
+                                <img src="{{ $post->image }}" class="img-fluid w-100"  alt="投稿画像">
                                 <br>
                             @endif
                             <p class="index-content content mt-3 fs-5">{{ $post->content }}</p>

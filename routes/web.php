@@ -8,6 +8,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Post_reportController;
+use App\Http\Controllers\Comment_reportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,6 @@ Route::get('/', [WebController::class, 'index'])->name('top');
 Auth::routes(['verify' => true]);
 
 Route::post('posts/create/ajax', [AjaxController::class, 'getCityOptions'])->name('getcity.ajax');
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
 //メール認証できていない場合はここに記載されているルートにはアクセスできない
 Route::middleware(['auth','verified'])->group(function(){
@@ -55,4 +54,5 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::delete('posts/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     Route::post('posts/post_report', [Post_reportController::class, 'store'])->name('post_report.store');
+    Route::post('posts/comment_report', [Comment_reportController::class, 'store'])->name('comment_report.store');
 });

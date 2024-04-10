@@ -31,30 +31,30 @@ class PostController extends Controller
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
                     $shop_name = $request->input('shop_name');
-                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
                     $total_count = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->count();
                 } else {
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
-                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
                     $total_count = Post::where('city', $request->input('city'))->count();
                 }
             } elseif ($request->input('shop_name') !== null){
                 $prefecture = $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                 $shop_name = $request->input('shop_name');
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->count();
             } else {
                 $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->count();
             }
         } elseif($request->input('shop_name') !== null){
             $shop_name = $request->input('shop_name');
-            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
             $total_count = Post::where('shop_name', 'LIKE', "%$shop_name%")->count();
         } else {
-            $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(4);
+            $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
             $total_count = Post::count();
         }
         
@@ -113,6 +113,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $path ="";
+
         $request->validate([
             'image' => [
                 'file',
@@ -126,20 +128,6 @@ class PostController extends Controller
             'content' => 'required',
         ]);
 
-        /*
-        $filename="";
-        $image = $request->file('image');
-
-        if( isset($image) === true) {
-            //拡張子を取得
-            $ext = $image->guessExtension();
-            //アップロードファイル名は[ランダム文字列20文字].[拡張子];
-            $filename = str_random(20). ".{$ext}";
-            // publicディレクトリのphotoディレクトリに保存
-            $path = $image->storeAs('photos', $filename, 'public');
-        }
-        */
-
         $post = new Post();
         $post->prefecture_id = $request->input('prefecture_id');
         $post->city = $request->input('city');
@@ -147,9 +135,14 @@ class PostController extends Controller
         $post->shop_name  = $request->input('shop_name');
         $post->title = $request->input('title');
 
-        $path = Storage::disk('s3')->putFile('photo/', $request->file('image'), 'public');
-        $post->image = Storage::disk('s3')->url($path);
-        
+        $image = $request->file('image');
+
+        if ( isset($image) == true ){
+            $path = Storage::disk('s3')->putFile('/photo', $request->file('image'));
+            $post->image = Storage::disk('s3')->url($path);
+        } else {
+            
+        }
         $post->content = $request->input('content');
         try {
         $post->save();
@@ -224,7 +217,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        Storage::disk('public')->delete('photos/'.$request->input('image_delete'));
+        //既存の画像の削除
+        $delete_image = ltrim($request->input('image_delete'), 'https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/photo/');
+        Storage::disk('s3')->delete('photo/'.$delete_image);
 
         $request->validate([
             'image' => [
@@ -238,25 +233,21 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-
-        $filename="";
-        $image = $request->file('image');
-
-        if( isset($image) === true) {
-            //拡張子を取得
-            $ext = $image->guessExtension();
-            //アップロードファイル名は[ランダム文字列20文字].[拡張子];
-            $filename = str_random(20). ".{$ext}";
-            // publicディレクトリのphotoディレクトリに保存
-            $path = $image->storeAs('photos', $filename, 'public');
-        }
         
         $post->user_id = Auth::user()->id;
         $post->prefecture_id = $request->input('prefecture_id') ? $request->input('prefecture_id'):$post->prefecture_id;
         $post->city = $request->input('city') ? $request->input('city'): $post->city;
         $post->shop_name  = $request->input('shop_name') ? $request->input('shop_name') : $post->shop_name;
         $post->title = $request->input('title') ? $request->input('title') : $post->title;
-        $post->image = $filename;
+        
+        $image = $request->file('image');
+
+        if ( $image ){
+            $path = Storage::disk('s3')->putFile('/photo', $request->file('image'));
+            $post->image = Storage::disk('s3')->url($path);
+        } else {
+            
+        }
         $post->content = $request->input('content')? $request->input('content') : $post->content;
         try {
         $post->update();

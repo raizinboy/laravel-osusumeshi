@@ -243,6 +243,27 @@ carousel-item > img {
     white-space: nowrap;
 }
 
+.comment {
+    margin-left: 16px;
+}
+
+.img_container {
+    height: 150px;
+    width: 250px;
+}
+
+.order_label {
+    font-size:18px;
+}
+
+.mypage_label {
+    font-size:64px;
+}
+
+.mypage_label2 {
+    font-size: 48px;
+}
+
 
 @media screen and (max-width:767px) {
     .carousel-img {
@@ -324,8 +345,9 @@ carousel-item > img {
     .page-number {
         font-size: 18px;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
+        padding: 0;
     }
 
     #post-create-btn {
@@ -344,5 +366,29 @@ carousel-item > img {
         position: fixed;
         bottom: 10%;
         right: 10%;
+    }
+
+    .comment-title {
+        font-size: 20px;
+    }
+
+    .comment {
+        margin-left:0;
+    }
+
+    .order_label {
+        font-size:14px;
+        justify-content: start;
+    }
+
+    .profile_btn {
+        font-size: 8px;
+    }
+
+    .mypage_label {
+        font-size: 28px;
+    }
+    .mypage_label2 {
+        font-size: 22px;
     }
 }

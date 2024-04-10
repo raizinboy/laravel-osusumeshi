@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
         $posts_count = Post::where('user_id', $id)->count();
-        $posts = Post::where('user_id', $id)->paginate(4);
+        $posts = Post::where('user_id', $id)->sortable()->paginate(10);
 
         $posts_array = array();
 
@@ -144,7 +144,7 @@ class UserController extends Controller
     {
         $ikitai_post_ids = Auth::user()->ikitais()->pluck('post_id')->toArray();
 
-        $posts = Post::whereIn('id', $ikitai_post_ids)->with('prefecture','user')->paginate(3);
+        $posts = Post::whereIn('id', $ikitai_post_ids)->with('prefecture','user')->sortable()->paginate(10);
 
         $posts_array = array();
 
@@ -177,7 +177,7 @@ class UserController extends Controller
     {
         $empathy_post_ids = Auth::user()->empathies()->pluck('post_id');
 
-        $posts = Post::whereIn('id', $empathy_post_ids)->with('prefecture','user')->paginate(3);
+        $posts = Post::whereIn('id', $empathy_post_ids)->with('prefecture','user')->sortable()->paginate(10);
 
         $posts_array = array();
 

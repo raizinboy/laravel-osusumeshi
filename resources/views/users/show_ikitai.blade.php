@@ -14,6 +14,10 @@
         <h1 class="display-3 ps-1 ms-3 col-md-10 d-none d-md-block"><span class="fs-2 mb-3 me-1">{{ Auth::user()->name }}さんの</span>行きたい投稿一覧 </h1>
         <h2 class="ps-1 ms-3 col-12 d-md-none d-block">{{ Auth::user()->name }}さんの</h2>
         <h2 class="ms-5 col-12 d-md-none d-block"> 行きたい投稿一覧 </h2>
+        <div class="col-md-10 col-11 d-flex fs-5 mt-2">
+            <div class="me-2 fw-bold">並び替え：</div>
+            <div>@sortablelink('updated_at', '新着順')</div>
+        </div>
         <p class="fs-4 align-middle mb-0 col-md-10 col-11">< 全{{$posts->lastPage()}}ページ中： <span class="fs-1 fw-bold">{{$posts->currentPage()}}</span> ページ目  ></p>
     </div>
     <div class="d-flex align-items-center justify-content-center row">
@@ -27,7 +31,7 @@
                     <p class="mb-1"><span class="me-1">{{ $post->prefecture->name }}</span>><span class="ms-1 me-1">{{ $post->city }}</span>><span class="ms-1 fs-3 fw-bold">{{ $post->shop_name }}</span></p>
                     <h1 class="post-title fw-bold" id="{{$post->id}}">{{ $post->title }}</h1>
                     @if($post->image !== '')
-                        <img src="{{ asset('storage/photos/' . $post->image) }}" class="img-fluid w-100"  alt="投稿画像">
+                        <img src="{{ $post->image }}" class="img-fluid w-100"  alt="投稿画像">
                         <br>
                     @endif
                     <p class="index-content content mt-3 fs-5">{{ $post->content }}</p>
@@ -50,6 +54,9 @@
             </div>
         </div>
         @endforeach
+        <div class="col-md-10">
+            {{ $posts->appends(request()->query())->links() }}
+        </div>
     </div>
 </div>
 @endsection

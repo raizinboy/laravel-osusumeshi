@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mb-5">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h1 class="fs-1 mb-0">投稿の編集</h1>
@@ -63,6 +63,16 @@
                         </span>
                         @endforeach
                     @enderror
+                </div>
+
+
+                <div class="form-group mb-2">
+                    <label for="img_preview" class="fs-4">プレビュー</label><br>
+                    @if($post->image)
+                    <img class="img_preview img-thumbnail img_container" src="{{ $post->image }}" alt="投稿画像">
+                    @else
+                    <img class="img_preview img-thumbnail img_container" src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/noimage.png" alt="投稿なし">
+                    @endif
                 </div>
 
                 <!-- 既存の画像を消す-->

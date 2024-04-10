@@ -61,7 +61,7 @@
                     
                 <div class="form-group mb-2">
                     <label for="title" class="fs-4">タイトル<span class="osusumeshi-posts-input-label">必須</label>
-                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" placeholder="最高でした。">
+                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" placeholder="のんびり過ごすのに最適です。">
                     @error('title')
                         @foreach($errors->get('title') as $message)
                         <span class="invalid-feedback" role="alert">
@@ -69,6 +69,11 @@
                         </span>
                         @endforeach
                     @enderror
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="img_preview" class="fs-4">プレビュー</label><br>
+                    <img class="img_preview img-thumbnail img_container" src="https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/noimage.png">
                 </div>
 
                 <div class="form-group mb-2">
@@ -85,7 +90,7 @@
 
                 <div class="form-group mb-2">
                     <label for="content" class="fs-4">おすすめ内容<span class="osusumeshi-posts-input-label">必須</label>
-                    <textarea name="content" id="content" rows="13" class="form-control @error('content') is-invalid @enderror" placeholder="aaaa">{{ old('content')}}</textarea>
+                    <textarea name="content" id="content" rows="13" class="form-control @error('content') is-invalid @enderror" placeholder="築80年の古民家を利用した店内では、ゆったりとした時間が過ごすことができ休日にピッタリのお店です。オーナーが作る和食もおいしく、地元で取れた肉や野菜を使っているそうです。この地域に訪れたら、ぜひとも寄ってほしいお店です。機会がありましたら行ってみてください。">{{ old('content')}}</textarea>
                     @error('content')
                         @foreach($errors->get('content') as $message)
                         <span class="invalid-feedback" role="alert">

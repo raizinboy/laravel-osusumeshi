@@ -224,4 +224,20 @@ window.addEventListener('DOMContentLoaded', function(){
             console.log('失敗');
         });
     });
+
+    $('#image').on('change', function(e) {
+        //画像を読み込む
+        const reader = new FileReader();
+        console.log('a');
+        if (this.files[0]) {
+            //result属性にファイルのURLを格納
+            reader.readAsDataURL(this.files[0]);
+            //画像が読み込まれたときの動作
+            reader.onload = function (e) {
+                $('.img_preview').attr('src', e.target.result).css('width', '250px').css('height', '150px');
+            }
+        } else {
+            $('.img_preview').attr('src', `/laravel-osusumeshi/public/img/noimage.png` ).css('width', '250px').css('height', '150px');
+        }
+    })
 });

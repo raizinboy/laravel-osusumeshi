@@ -6,22 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\CustomVerifyEmail;
 use App\Notifications\CustomResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new CustomVerifyEmail());
-    }
-
-    public function sendPasswordResetNotification($token){
-        $this->notify(new CustomResetPassword($token));
-    }
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +47,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmail());
+    }
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new CustomResetPassword($token));
+    }
+
     public function posts() 
     {
         return $this->hasMany(Post::class);
@@ -80,6 +83,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function Post_reports()
     {
-        return $this->hasmany(Post_reports::class);
+        return $this->hasmany(Post_report::class);
+    }
+
+    public function comment_reports()
+    {
+        return $this->hasmany(Comment_report::class);
     }
 }

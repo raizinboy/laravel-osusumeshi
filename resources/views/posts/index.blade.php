@@ -60,7 +60,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-10 col-11 d-flex fs-5 mt-2">
+        <div class="col-md-10 col-11 d-flex mt-2 order_label">
             <div class="me-2 fw-bold">並び替え：</div>
             <div class="me-3">@sortablelink('ikitais_count', '行きたい数')</div>
             <div class="me-3">@sortablelink('empathies_count', '共感数')</div>
@@ -79,8 +79,8 @@
                 
                     <p class="mb-1"><span class="me-1">{{ $post->prefecture->name }}</span>><span class="ms-1 me-1">{{ $post->city }}</span>><span class="ms-1 fs-3 fw-bold">{{ $post->shop_name }}</span></p>
                     <h1 class="post-title fw-bold" id="{{$post->id}}">{{ $post->title }}</h1>
-                    @if($post->image !== '')
-                        <img src="{{ asset('storage/photos/' . $post->image) }}" class="img-fluid w-100"  alt="投稿画像">
+                    @if($post->image)
+                        <img src="{{ $post->image }}" class="img-fluid w-100"  alt="投稿画像">
                         <br>
                     @endif
                     <p class="index-content mt-3 fs-5">{{ $post->content }}</p>
