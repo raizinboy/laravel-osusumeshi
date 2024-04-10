@@ -27,7 +27,7 @@ class Post extends Model
 
     public function prefecture()
     {
-        return $this->belongsTo(prefecture::class);
+        return $this->belongsTo(Prefecture::class);
     }
 
     public function comments()
