@@ -18,7 +18,7 @@
             @endif
 
             @if($city)
-            <h3 class="search-text ms-1 mb-0">><span class="fw-bold ps-1">「{{$city}} 」の</span></h3>
+            <h3 class="search-text ms-1 mb-0">><span class="fw-bold ps-1">{{$city}} </span></h3>
             @endif
 
             @if($shop_name)

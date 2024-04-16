@@ -21,8 +21,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group mb-2">
-                            <label for="prefecture_id" class="col-md-12 fs-4">都道府県<span class="osusumeshi-posts-input-label">必須</span></label>
-                            <select class="col-md-12 p-2 border rounded" name="prefecture_id" id="prefecture_id">
+                            <label for="prefecture_id" class="col-md-12 col-12 fs-4">都道府県<span class="osusumeshi-posts-input-label">必須</span></label>
+                            <select class="col-md-12 col-12 p-2 border rounded" name="prefecture_id" id="prefecture_id">
                                 @foreach($prefectures as $pref)
                                 <option value="{{ $pref->id }}">{{ $pref->name }} </option>
                                 @endforeach
@@ -32,8 +32,8 @@
 
                     <div class="col-md-3">
                         <div class="form-group mb-2">
-                            <label for="city" class="cpl-md-12 fs-4">市町村<span class="osusumeshi-posts-input-label">必須</span></label>
-                            <select name="city" class="col-md-12 p-2 border rounded @error('city') is-invalid @enderror"" id="city">
+                            <label for="city" class="cpl-md-12 col-12 fs-4">市町村<span class="osusumeshi-posts-input-label">必須</span></label>
+                            <select name="city" class="col-md-12 col-12 p-2 border rounded @error('city') is-invalid @enderror"" id="city">
                             </select>
                             @error('city')
                                 @foreach($errors->get('city') as $message)

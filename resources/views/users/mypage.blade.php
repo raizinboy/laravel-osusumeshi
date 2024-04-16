@@ -12,7 +12,7 @@
             <div class="mt-2 mb-2 top_label">
                 <a class="mt-1" href="{{ route('top') }}">TOP</a><span class="ms-2 me-1">></span><span>{{ $user->name }}のページ</span>
             </div>
-            <h1 class="mypage_label col-md-10 col-12"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}のページ</h1>
+            <h1 class="mypage_label col-md-12 col-12"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}のページ</h1>
             <div class="card profile-card">
                 <div class="row d-flex justify-content-between">
                     <h1 class="col-md-8 col-11 mt-3 mypage_label2"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}</h1>

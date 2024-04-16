@@ -12,8 +12,8 @@
             <a href="{{ route('top') }}">TOP</a><span class="ms-2 me-1">></span><a class="mt-1" href="{{ route('mypage', Auth::user()->id) }}">マイページ</a><span class="ms-2 me-1">></span><span>行きたい投稿一覧</span>
         </div>
         <h1 class="display-3 ps-1 ms-3 col-md-10 d-none d-md-block"><span class="fs-2 mb-3 me-1">{{ Auth::user()->name }}さんの</span>行きたい投稿一覧 </h1>
-        <h2 class="ps-1 ms-3 col-12 d-md-none d-block">{{ Auth::user()->name }}さんの</h2>
-        <h2 class="ms-5 col-12 d-md-none d-block"> 行きたい投稿一覧 </h2>
+        <h2 class="ms-3 fs-3 col-12 d-md-none d-block">{{ Auth::user()->name }}さんの</h2>
+        <h2 class="ms-3 fs-3 col-12 d-md-none d-block"> 行きたい投稿一覧 </h2>
         <div class="col-md-10 col-11 d-flex fs-5 mt-2">
             <div class="me-2 fw-bold">並び替え：</div>
             <div>@sortablelink('updated_at', '新着順')</div>
