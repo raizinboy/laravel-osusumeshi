@@ -13,7 +13,6 @@
             <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
-                
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group mb-2">
@@ -29,7 +28,6 @@
                             </select>
                         </div>
                     </div>
-
 
                     <div class="col-md-3">
                         <div class="form-group mb-2">

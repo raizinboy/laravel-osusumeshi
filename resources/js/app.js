@@ -10,13 +10,12 @@ window.addEventListener('DOMContentLoaded', function(){
 
     const getCityName = () =>{
         var prefecture_id = ('00' + $('#prefecture_id').val()).slice(-2);
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
         }).done(function(data) {
             var data = JSON.parse(data);
@@ -77,14 +76,12 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#prefecture_id').change(function(){
 
         var prefecture_id = ('00' + $(this).val()).slice(-2);
-        console.log(prefecture_id)
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
 
         }).done(function(data) {
@@ -101,13 +98,12 @@ window.addEventListener('DOMContentLoaded', function(){
     //投稿一覧で読み込んだ際に市町村を変更させる処理
     const searchgetCityName = () =>{
         var prefecture_id = ('00' + $('#prefecture_id_search').val()).slice(-2);
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             type:"POST",
-            url: `/laravel-osusumeshi/public/posts/create/ajax`,
+            url: `/posts/create/ajax`,
             data: {"prefecture_id":prefecture_id },
         }).done(function(data) {
             var data = JSON.parse(data);
@@ -130,14 +126,13 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#prefecture_id_search').change(function(){
 
         var prefecture_id = ('00' + $(this).val()).slice(-2);
-        console.log(prefecture_id)
         if (prefecture_id != '00'){
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type:"POST",
-                url: `/laravel-osusumeshi/public/posts/create/ajax`,
+                url: `/posts/create/ajax`,
                 data: {"prefecture_id":prefecture_id },
 
             }).done(function(data) {
