@@ -265,12 +265,29 @@ carousel-item > img {
     font-size:18px;
 }
 
+.introduction_title {
+    font-size: 24px;
+}
+
 .mypage_label {
     font-size:64px;
 }
 
 .mypage_label2 {
+    font-size: 36px;
+    margin-left: 18px;
+}
+
+.mypage_label3 {
     font-size: 48px;
+}
+
+.current_page_label {
+    font-size: 36px;
+}
+
+.top_label {
+    font-size: 18px;
 }
 
 
@@ -352,7 +369,7 @@ carousel-item > img {
     }
 
     .page-number {
-        font-size: 18px;
+        font-size: 14px;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -391,13 +408,35 @@ carousel-item > img {
     }
 
     .profile_btn {
-        font-size: 8px;
+        font-size: 12px;
+        width:90%;
+        margin-bottom:10px;
+    }
+    
+    .introduction_title {
+        font-size: 14px;
     }
 
     .mypage_label {
-        font-size: 28px;
+        font-size: 20px;
     }
     .mypage_label2 {
-        font-size: 22px;
+        font-size: 20px;
+    }
+
+    .mypage_label3 {
+        font-size: 18px;
+    }
+
+    .count_label {
+        font-size: 10px;
+    }
+
+    .current_page_label {
+        font-size: 25px;
+    }
+
+    .top_label {
+        font-size: 12px;
     }
 }

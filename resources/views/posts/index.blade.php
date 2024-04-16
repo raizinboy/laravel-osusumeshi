@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-10 col-12">
             <form class="row g-1" action="{{ route('posts.index') }}" method="GET">
-                <div class="col-md-2 col-12">
+                <div class="col-md-3 col-12">
                     <select name="prefecture_id" id="prefecture_id_search" class="col-md-12 col-12 border rounded p-2" placeholder="都道府県">
                             <option value="">都道府県（選択なし）</option>
                             @foreach($prefectures as $pref) 
@@ -40,7 +40,7 @@
                             @endforeach
                     </select>
                 </div>   
-                <div class="col-md-2 col-12">
+                <div class="col-md-3 col-12">
                     <select name="city" class="col-md-12 col-12 p-2 border rounded @error('city') is-invalid @enderror"" id="city">
 
                         @if($city)
@@ -50,7 +50,7 @@
                         @endif
                     </select>
                 </div>
-                <div class="col-md-2 col-12">
+                <div class="col-md-3 col-12">
                     <input name="shop_name" type="text" class="col-md-12 col-12 border rounded p-2" placeholder="店舗名" value="{{ $shop_name }}"> 
                 </div>
                 <div class="search-btn-wrap row col-md-3 col-12">

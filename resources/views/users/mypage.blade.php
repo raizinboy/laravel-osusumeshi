@@ -4,24 +4,24 @@
 <div class="container mb-5">
     @if(session('message'))
     <div class="row justify-content-center">
-        <div class="col-md-10 alert alert-primary p-5 m-2 fs-1 border rounded-3 fw-bold text-center">{{ session('message') }}</div>
+        <div class="col-md-10 col-11 alert alert-primary p-5 m-2 fs-1 border rounded-3 fw-bold text-center">{{ session('message') }}</div>
     </div>
     @endif
     <div class="d-flex justify-content-center row">
-        <div class="row col-md-10 col-11 mb-3 ps-0 pe-0">
-            <div class="mt-1 mb-2 fs-5">
+        <div class="row col-md-10 col-11 mb-1 ps-0 pe-0">
+            <div class="mt-2 mb-2 top_label">
                 <a class="mt-1" href="{{ route('top') }}">TOP</a><span class="ms-2 me-1">></span><span>{{ $user->name }}のページ</span>
             </div>
-            <h1 class="mypage_label ps-1 col-md-10 col-12"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}のページ</h1>
+            <h1 class="mypage_label col-md-10 col-12"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}のページ</h1>
             <div class="card profile-card">
                 <div class="row d-flex justify-content-between">
-                    <h1 class="col-md-8 col-8 mt-3 fs-1"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}</h1>
+                    <h1 class="col-md-8 col-11 mt-3 mypage_label2"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}</h1>
                     @if($user->id == Auth::user()->id)
-                    <div class="col-md-3 col-4 d-flex justify-content-center align-items-center">
+                    <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
                         @if(isset( $user->profile->user_id))
-                            <a data-bs-toggle="modal" data-bs-target="#update-profile-modal"class="profile_btn h-50 btn btn-success">プロフィールの編集</a>
+                            <a data-bs-toggle="modal" data-bs-target="#update-profile-modal"class="profile_btn btn btn-success">プロフィールの編集</a>
                         @else
-                            <a data-bs-toggle="modal" data-bs-target="#create-profile-modal"class="profile_btn h-50 btn btn-success">プロフィールの編集</a>
+                            <a data-bs-toggle="modal" data-bs-target="#create-profile-modal"class="profile_btn btn btn-success">プロフィールの編集</a>
                         @endif
                         
                         <form method="POST" action="{{ route('profile.create') }}">
@@ -40,7 +40,7 @@
                     @endif
                 </div>
                 <div class="card-body pt-0 pb-0">
-                    <h5 class="card-title fs-3">＜自己紹介＞</h5>
+                    <h5 class="card-title introduction_title">＜自己紹介＞</h5>
                     <div class="border border-1 h-75">
                         <p class="card-text p-2">
                         @if(isset($user->profile->user_id))
@@ -51,12 +51,12 @@
                 </div>
             </div>
             <div>
-                <h1 class="mypage_label2 col-md-12 col-12 mt-3"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}の投稿（全{{$posts_count}}件）</h1>
+                <h1 class="mypage_label3 col-md-12 col-12 mt-3"><i class="fa-solid fa-circle-user me-2"></i>{{$user->name}}の投稿 <span class="count_label">（全{{$posts_count}}件）</span></h1>
                 <div class="col-md-10 col-11 d-flex mt-2 order_label">
                     <div class="me-2 fw-bold">並び替え：</div>
                     <div>@sortablelink('updated_at', '新着順')</div>
                 </div>
-                <p class="page-number align-middle mb-0 col-md-10">< 全{{$posts->lastPage()}}ページ中： <span class="fs-1 fw-bold">{{$posts->currentPage()}}</span> ページ目  ></p>
+                <p class="page-number align-middle mb-0 col-md-12 col-12">< 全{{$posts->lastPage()}}ページ中： <span class="current_page_label fw-bold">{{$posts->currentPage()}}</span> ページ目  ></p>
             </div>
         </div>
         @foreach($posts as $post)

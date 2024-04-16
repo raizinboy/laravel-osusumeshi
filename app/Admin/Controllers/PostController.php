@@ -10,6 +10,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class PostController extends AdminController
 {
@@ -78,9 +79,10 @@ class PostController extends AdminController
      *
      * @return Form
      */
-    protected function form()
+    protected function form( Request $request)
     {
-        $form = new Form(new Post());
+        $user = new Post();
+        $form = new Form($user);
 
         $form->select('user_id', __('User Name'))->options(User::all()->pluck('name', 'id'));
         $form->select('prefecture_id', __('Prefecture Name'))->options(Prefecture::all()->pluck('name', 'id'));
@@ -92,7 +94,7 @@ class PostController extends AdminController
             $path = Storage::disk('s3')->putFile('/photo', $file);
             return  Storage::disk('s3')->url($path);
         });
-       
+        
         return $form;
     }
 }

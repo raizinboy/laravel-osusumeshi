@@ -382,11 +382,12 @@ carousel-item > img {
     }
 
     .profile_btn {
-        font-size: 8px;
+        font-size: 16px;
+        width:100%;
     }
 
     .mypage_label {
-        font-size: 28px;
+        font-size: 24px;
     }
     .mypage_label2 {
         font-size: 22px;
