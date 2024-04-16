@@ -149,7 +149,7 @@ class PostController extends Controller
         } catch( \Exception $e) {
             return back()->with('message', '作成に失敗しました。');
         }
-        return to_route('posts.index');
+        return to_route('posts.index')->with('message', '投稿完了しました。');
     }
 
     /**
@@ -254,7 +254,7 @@ class PostController extends Controller
         } catch (\Exception $e){
             return back()->with('message', '更新に失敗しました。');
         }
-        return to_route('posts.index');
+        return to_route('posts.index')->with('message', '投稿を編集しました。');
     }
 
     /**
