@@ -123,7 +123,7 @@ class PostController extends Controller
             ],
             'prefecture_id' => 'required',
             'city' => 'required',
-            'shop_name' => ['required, max:20'],
+            'shop_name' => ['required', 'max:20'],
             'title' => ['required', 'max:20'],
             'content' => ['required', 'max:200'],
         ]);
