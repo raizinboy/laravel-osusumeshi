@@ -129,6 +129,17 @@ return [
     |
     */
 
+    'attributes' => [
+        'name' => '氏名',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'title' => 'タイトル',
+        'shop_name' => '店舗名',
+        'prefecture_id' => '都道府県',
+        'city' => '市町村',
+        'content' => '内容',
+    ],
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
