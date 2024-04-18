@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="fs-5 text-center">一度投稿を削除するとを復元することはできません。</p>
+                <p class="fs-5 text-center">一度投稿を削除すると復元することはできません。</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light dashboard-delete-link" data-bs-dismiss="modal">キャンセル</button>

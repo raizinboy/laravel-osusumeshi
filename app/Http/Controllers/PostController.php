@@ -31,30 +31,30 @@ class PostController extends Controller
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
                     $shop_name = $request->input('shop_name');
-                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
                     $total_count = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->count();
                 } else {
                     $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                     $city = $request->input('city');
-                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
                     $total_count = Post::where('city', $request->input('city'))->count();
                 }
             } elseif ($request->input('shop_name') !== null){
                 $prefecture = $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
                 $shop_name = $request->input('shop_name');
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->count();
             } else {
                 $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
                 $total_count = Post::where('prefecture_id', $request->prefecture_id)->count();
             }
         } elseif($request->input('shop_name') !== null){
             $shop_name = $request->input('shop_name');
-            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
             $total_count = Post::where('shop_name', 'LIKE', "%$shop_name%")->count();
         } else {
-            $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->paginate(10);
+            $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
             $total_count = Post::count();
         }
         
@@ -123,9 +123,9 @@ class PostController extends Controller
             ],
             'prefecture_id' => 'required',
             'city' => 'required',
-            'shop_name' => 'required',
-            'title' => 'required',
-            'content' => 'required',
+            'shop_name' => ['required, max:20'],
+            'title' => ['required', 'max:20'],
+            'content' => ['required', 'max:200'],
         ]);
 
         $post = new Post();
@@ -228,10 +228,10 @@ class PostController extends Controller
                 'mimes:jpeg,png',
             ],
             'prefecture_id' => 'required',
-            'shop_name' => 'required',
+            'shop_name' => ['required', 'max:20'],
             'city' => 'required',
-            'title' => 'required',
-            'content' => 'required',
+            'title' => ['required', 'max:20'],
+            'content' => ['required', 'max:200'],
         ]);
         
         $post->user_id = Auth::user()->id;

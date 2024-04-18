@@ -65,7 +65,7 @@
 
 
                 <div class="form-group mb-2">
-                    <label for="img_preview" class="fs-4">プレビュー</label><br>
+                    <label for="img_preview" class="fs-4">現在の画像 or プレビュー</label><br>
                     @if($post->image)
                     <img class="img_preview img-thumbnail img_container" src="{{ $post->image }}" alt="投稿画像">
                     @else

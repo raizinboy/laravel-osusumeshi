@@ -258,10 +258,10 @@ window.addEventListener('DOMContentLoaded', function(){
             reader.readAsDataURL(this.files[0]);
             //画像が読み込まれたときの動作
             reader.onload = function (e) {
-                $('.img_preview').attr('src', e.target.result).css('width', '250px').css('height', '150px');
+                $('.img_preview').attr('src', e.target.result);
             }
         } else {
-            $('.img_preview').attr('src', `/laravel-osusumeshi/public/img/noimage.png` ).css('width', '250px').css('height', '150px');
+            $('.img_preview').attr('src', `https://s3.ap-northeast-1.amazonaws.com/osusumeshi123/top/noimage.png` );
         }
     })
 });

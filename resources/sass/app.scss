@@ -257,8 +257,8 @@ carousel-item > img {
 }
 
 .img_container {
-    height: 150px;
-    width: 250px;
+    height: 250px;
+    width: 400px;
 }
 
 .order_label {
@@ -392,6 +392,9 @@ carousel-item > img {
         position: fixed;
         bottom: 10%;
         right: 10%;
+    }
+    .img_container {
+        width: 100%;
     }
 
     .comment-title {
