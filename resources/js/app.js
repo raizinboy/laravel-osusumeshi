@@ -7,26 +7,6 @@ window.addEventListener('DOMContentLoaded', function(){
     const showPasswordConfirmBtn = document.getElementById('show_password_confirm_btn');
     const inputPassConfirm = document.getElementById('password_confirm');
 
-
-    const getCityName = () =>{
-        var prefecture_id = ('00' + $('#prefecture_id').val()).slice(-2);
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            },
-            type:"POST",
-            url: `/posts/create/ajax`,
-            data: {"prefecture_id":prefecture_id },
-        }).done(function(data) {
-            var data = JSON.parse(data);
-            $.each(data['data'], function (id) {
-                $('#city').append($('<option>').text(data['data'][id]['name']).attr('value', data['data'][id]['name']));
-            });
-        }).fail(function(){
-            console.log("失敗");
-        });
-    };
-
     //二度押し防止
     $(function () {
         $('form').submit(function () {
@@ -66,66 +46,10 @@ window.addEventListener('DOMContentLoaded', function(){
             }
         });
     }
-        
-    //読み込んだ際に市町村を取得する関数
-    if($('#prefecture_id').val()){
-        getCityName();
-    }
-
-    //都道府県を変更すると表示される市町村を変更させる処理
-    $('#prefecture_id').change(function(){
-
-        var prefecture_id = ('00' + $(this).val()).slice(-2);
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            },
-            type:"POST",
-            url: `/posts/create/ajax`,
-            data: {"prefecture_id":prefecture_id },
-
-        }).done(function(data) {
-            $('#city option').remove();
-            var data = JSON.parse(data);
-            $.each(data['data'], function (id) {
-                $('#city').append($('<option>').text(data['data'][id]['name']).attr('value', data['data'][id]['name']));
-            });
-        }).fail(function(){
-            console.log("失敗");
-        });
-    });
-
-    //投稿一覧で読み込んだ際に市町村を変更させる処理
-    const searchgetCityName = () =>{
-        var prefecture_id = ('00' + $('#prefecture_id_search').val()).slice(-2);
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            },
-            type:"POST",
-            url: `/posts/create/ajax`,
-            data: {"prefecture_id":prefecture_id },
-        }).done(function(data) {
-            var data = JSON.parse(data);
-            if($('#city').val()){
-                $('#city').append($('<option>').text('市町村（選択なし)').attr('value', ''));
-            }
-            $.each(data['data'], function (id) {
-                $('#city').append($('<option>').text(data['data'][id]['name']).attr('value', data['data'][id]['name']));
-            });
-        }).fail(function(){
-            console.log("失敗");
-        });
-    };
-
-    if($('#prefecture_id_search').val()){
-        searchgetCityName();
-    }
-
-    //投稿一覧で都道府県を変更すると表示される市町村を変更させる処理
-    $('#prefecture_id_search').change(function(){
-
-        var prefecture_id = ('00' + $(this).val()).slice(-2);
+ 
+    //都道府県の値から市町村にデータを入れる処理
+    const getCityName = (first) =>{
+        var prefecture_id = ('00' + $('#prefecture_id').val()).slice(-2);
         if (prefecture_id != '00'){
             $.ajax({
                 headers: {
@@ -134,11 +58,17 @@ window.addEventListener('DOMContentLoaded', function(){
                 type:"POST",
                 url: `/posts/create/ajax`,
                 data: {"prefecture_id":prefecture_id },
-
             }).done(function(data) {
-                $('#city option').remove();
                 var data = JSON.parse(data);
-                $('#city').append($('<option>').text('市町村（選択なし)').attr('value', ''));
+                //読み込んだ時にcityの値があるときはoptionをremoveしない。
+                if ( first == 'first' &&  $('#city').val()){
+                } else {
+                    $('#city option').remove();
+                }
+                //投稿一覧の画面だけ<option>市町村(選択なし)を加える。
+                if($('#city').data('search')){
+                    $('#city').append($('<option>').text('市町村（選択なし）').attr('value', ''));
+                }
                 $.each(data['data'], function (id) {
                     $('#city').append($('<option>').text(data['data'][id]['name']).attr('value', data['data'][id]['name']));
                 });
@@ -147,8 +77,18 @@ window.addEventListener('DOMContentLoaded', function(){
             });
         } else {
             $('#city option').remove();
-            $('#city').append($('<option>').text('市町村（選択なし)').attr('value', ''));
+            $('#city').append($('<option>').text('市町村（選択なし）').attr('value', ''));
         }
+    };
+        
+    //読み込んだ際に市町村を取得する関数
+    if($('#prefecture_id').val()){
+        getCityName('first');
+    }
+
+    //都道府県を変更すると表示される市町村を変更させる処理
+    $('#prefecture_id').change(function(){
+        getCityName();
     });
 
     //行きたいボタン
