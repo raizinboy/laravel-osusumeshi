@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', function(){
     //都道府県の値から市町村にデータを入れる処理
     const getCityName = (first) =>{
         var prefecture_id = ('00' + $('#prefecture_id').val()).slice(-2);
-        if (prefecture_id != '00'){
+        if (prefecture_id !== '00'){
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -61,8 +61,7 @@ window.addEventListener('DOMContentLoaded', function(){
             }).done(function(data) {
                 var data = JSON.parse(data);
                 //読み込んだ時にcityの値があるときはoptionをremoveしない。
-                if ( first == 'first' &&  $('#city').val()){
-                } else {
+                if (!(first == 'first' &&  $('#city').val())){
                     $('#city option').remove();
                 }
                 //投稿一覧の画面だけ<option>市町村(選択なし)を加える。
