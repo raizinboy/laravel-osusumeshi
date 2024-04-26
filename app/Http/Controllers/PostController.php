@@ -23,36 +23,46 @@ class PostController extends Controller
 
         $prefecture = "";
         $city = "";
-        $shop_name="";
-
+        $shop_name = "";
+        $prefecture_get = Prefecture::where('id', $request->input('prefecture_id'));
+        $posts_prefecture = Post::where('prefecture_id', $request->prefecture_id);
+        $posts_city = Post::where('city', $request->input('city'));
+        $posts_shop_name = Post::where('shop_name', 'LIKE', "%$shop_name%");
+        
+        //都道府県がある
         if($request->input('prefecture_id') !== null){
+            //都道府県あり　かつ　市町村あり
             if($request->input('city') !== null) {
+                $prefecture = $prefecture_get;
+                $city = $request->input('city');
+                //都道府県あり　かつ　市町村あり　かつ　店舗名あり。
                 if ($request->input('shop_name') !== null){
-                    $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                    $city = $request->input('city');
                     $shop_name = $request->input('shop_name');
-                    $posts = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
-                    $total_count = Post::where('city', $request->input('city'))->where('shop_name', 'LIKE', "%$shop_name%")->count();
+                    $posts = $posts_city->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
+                    $total_count = $posts_city->where('shop_name', 'LIKE', "%$shop_name%")->count();
+                //都道府県あり　かつ　市町村あり　かつ　店舗名なし。
                 } else {
-                    $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                    $city = $request->input('city');
-                    $posts = Post::where('city', $request->input('city'))->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
-                    $total_count = Post::where('city', $request->input('city'))->count();
+                    $posts = $posts_city->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
+                    $total_count = $posts_city->count();
                 }
+            //都道府県あり　かつ　市町村なし　かつ　店舗名あり。
             } elseif ($request->input('shop_name') !== null){
-                $prefecture = $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
+                $prefecture = $prefecture_get->first();
                 $shop_name = $request->input('shop_name');
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
-                $total_count = Post::where('prefecture_id', $request->prefecture_id)->where('shop_name', 'LIKE', "%$shop_name%")->count();
+                $posts = $posts_prefecture->where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
+                $total_count =  $posts_prefecture->where('shop_name', 'LIKE', "%$shop_name%")->count();
+            //都道府県あり　かつ　市町村なし　かつ　店舗名なし。
             } else {
-                $prefecture = Prefecture::where('id', $request->input('prefecture_id'))->first();
-                $posts = Post::where('prefecture_id', $request->prefecture_id)->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
-                $total_count = Post::where('prefecture_id', $request->prefecture_id)->count();
+                $prefecture = $prefecture_get->first();
+                $posts = $posts_prefecture->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
+                $total_count =  $posts_prefecture->count();
             }
+        //都道府県なし　かつ　市町村なし　かつ　店舗名あり
         } elseif($request->input('shop_name') !== null){
             $shop_name = $request->input('shop_name');
-            $posts = Post::where('shop_name', 'LIKE', "%$shop_name%")->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
-            $total_count = Post::where('shop_name', 'LIKE', "%$shop_name%")->count();
+            $posts = $posts_shop_name->with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
+            $total_count = $posts_shop_name->count();
+        //都道府県なし　かつ　市町村なし　かつ　店舗名なし
         } else {
             $posts = Post::with('prefecture','user')->sortable()->withCount('ikitais')->withCount('empathies')->orderByDesc('updated_at')->paginate(10);
             $total_count = Post::count();
